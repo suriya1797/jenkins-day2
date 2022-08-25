@@ -7,7 +7,7 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    withCredentials([usernamePassword( credentialsId: 'myCredentials',
+                    withCredentials([usernamePassword( credentialsId: 'suriya-git',
                      usernameVariable: 'MYUSER', passwordVariable: 'MYPWD' )]) {
                         echo "User: $MYUSER, Pwd: $MYPWD"
                     }
