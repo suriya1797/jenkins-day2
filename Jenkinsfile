@@ -27,16 +27,14 @@ pipeline {
             }
         }
         stage('deploy') {
-            when {
-                expression {
-                    TEST_RESULTS
-                }
-            }
-
+            
             steps {
                 echo "${env.TEST_RESULTS}"
                 echo "${TEST_RESULTS}"
                 script {
+                    sh 'docker pull mysql-mysql-server'
+                    sh 'docker run --name=mysql-container -d mysql/mysql-server'
+                    sh 'docker run -p 3306:3306 --name mysql-container -e MYSQL_ROOT_PASSWORD=root123! -d mysql'
                     print(TEST_RESULTS)
                     if (TEST_RESULTS) {
                         sh 'sudo sh deploy.sh'
