@@ -32,9 +32,8 @@ pipeline {
                 echo "${env.TEST_RESULTS}"
                 echo "${TEST_RESULTS}"
                 script {
-                    sh 'docker pull mysql-mysql-server'
-                    sh 'docker run --name=mysql-container -d mysql/mysql-server'
-                    sh 'docker run -p 3306:3306 --name mysql-container -e MYSQL_ROOT_PASSWORD=root123! -d mysql'
+                    sh 'docker pull suriya1997/mysql:mysqlimage'
+                    sh 'docker run -p 3000:3000 suriya1997/mysql:mysqlimage'
                     print(TEST_RESULTS)
                     if (TEST_RESULTS) {
                         sh 'sudo sh deploy.sh'
